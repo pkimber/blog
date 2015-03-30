@@ -20,7 +20,7 @@ def get_readme():
 
 setup(
     name='kb-blog',
-    packages=['blog', 'blog.urls', 'blog.tests'],
+    packages=['blog', 'blog.tests'],
     package_data={
         'blog': [
             'templates/blog/*.*',
