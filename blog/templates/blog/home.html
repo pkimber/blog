@@ -1,7 +1,17 @@
 {% extends 'blog/base.html' %}
 
 {% block sub_title %}
-  Home Block Sub-title
+  <div class="page-header">
+    {% if user.is_authenticated %}
+        <a href="{% url 'blog.views.post_new' %}" class="top-menu" ><span class="glyphicon glyphicon-plus"></span></a>
+        <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="{% url 'django.contrib.auth.views.logout' %}" class="top-menu"><span class="glyphicon glyphicon-log-out"></span></a>
+        <p class="user-id">Welcome {{ user.username }}!</p>
+    {% else %}
+        <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-log-in"></span></a>
+    {% endif %}
+    <h1><a href="/">Greg's Blog</a></h1>
+</div>
 {% endblock sub_title %}
 
 {% block sub_heading %}
