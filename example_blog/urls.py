@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 
 from .views import HomeView
+from . import views
 
 
 admin.autodiscover()
@@ -36,6 +37,7 @@ urlpatterns = patterns(
     url(regex=r'^blog/',
         view=include('blog.urls')
         ),
+    url(r'^$', views.post_list),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
