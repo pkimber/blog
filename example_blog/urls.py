@@ -20,10 +20,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(regex=r'^$',
-        view=HomeView.as_view(),
-        name='project.home'
-        ),
+    url(r'^$', views.post_list),
     url(regex=r'^',
         view=include('login.urls')
         ),
@@ -37,7 +34,6 @@ urlpatterns = patterns(
     url(regex=r'^blog/',
         view=include('blog.urls')
         ),
-    url(r'^$', views.post_list),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
