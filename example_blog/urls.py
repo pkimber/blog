@@ -20,7 +20,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', views.post_list),
+    url(r'^$', views.post_list, name='project.home'),
     url(regex=r'^',
         view=include('login.urls')
         ),
