@@ -1,47 +1,57 @@
 {% extends 'blog/base.html' %}
 
+{% block sub_title %}
+    {% if post.published_date %}
+         Post Detail
+    {% else %}
+    Draft Post Detail
+    {% endif %}      
+{% endblock sub_title %}
+
+{% block sub_heading %}
+    {% if post.published_date %}
+         Post Detail
+    {% else %}
+    Draft Post Detail
+    {% endif %}
+{% endblock sub_heading %}
+
 {% block content %}
     <div class="date">
-    {% if post.published_date %}
-    {{ post.published_date }}
-    {% else %}
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <ul>
-            <li>
-              <a href="{% url 'blog.views.post_publish' pk=post.pk %}"><span><i class="fa fa-paper-plane-o"></i></span>
-              Publish Post
-              </a>
-            </li>
-          </ul>
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <ul>
+            {% if post.published_date %}
+            {% else %}
+              <li>
+                <a href="{% url 'blog.views.post_publish' pk=post.pk %}"><i class="fa fa-paper-plane-o"></i>
+                  Publish Post
+                </a>
+              </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+              <li>
+                <a href="{% url 'post_edit' pk=post.pk %}"><i class="fa fa-edit"></i>
+                  Edit Post
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'post_remove' pk=post.pk %}"><i class="fa fa-trash-o"></i>
+                  Delete Post
+                </a>
+              </li>
+            {% endif %}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    {% endif %}
-    {% if user.is_authenticated %}
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <ul>
-            <li>
-              <a href="{% url 'post_edit' pk=post.pk %}"><i class="fa fa-edit"></i>
-              Edit Post
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'post_remove' pk=post.pk %}"><i class="fa fa-trash"></i>
-                Delete Post
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    {% endif %}
     </div>
     <div class="post">
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaks }}</p>
+      {% if post.published_date %}
+        {{ post.published_date }}
+      {% endif %}
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.text|linebreaks }}</p>
     </div>    
 {% endblock content %}

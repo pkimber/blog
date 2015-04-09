@@ -10,6 +10,7 @@ from braces.views import (
 from django.contrib.auth.decorators import login_required
 from .models import Post
 from .forms import PostForm
+from .forms import ConfirmForm
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
@@ -64,14 +65,26 @@ def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect('blog.views.post_detail', pk=pk)
-    
+
 @login_required
 def post_remove(request, pk):
+    import ipdb
+    ipdb.set_trace()
     post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('blog.views.post_list')
-
-
+    form = ConfirmForm(instance=post)
+    if form.is_valid():
+        post.delete()
+        return redirect('blog.views.post_list')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_edit.html', {'form': form})
+    
+#@login_required
+#def post_remove(request, pk):
+#    post = get_object_or_404(Post, pk=pk)
+#    post.delete()
+#    return redirect('blog.views.post_list')    
+        
 class BlogView(
         LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, TemplateView):
 

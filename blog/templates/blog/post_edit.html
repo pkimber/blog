@@ -1,5 +1,21 @@
 {% extends 'blog/base.html' %}
 
+{% block sub_title %}
+    {% if post.published_date %}
+         Post Edit
+    {% else %}
+    Draft Post Edit
+    {% endif %}   
+{% endblock sub_title %}
+
+{% block sub_heading %}
+    {% if post.published_date %}
+         Post Edit
+    {% else %}
+    Draft Post Edit
+    {% endif %}
+{% endblock sub_heading %}
+
 {% block content %}
     {% include '_form.html' %}
 {% endblock %}

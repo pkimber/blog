@@ -1,5 +1,13 @@
 {% extends 'blog/base.html' %}
 
+{% block sub_title %}
+    Draft Post List
+{% endblock sub_title %}
+
+{% block sub_heading %}
+    Draft Post List
+{% endblock sub_heading %}
+
 {% block content %}
     {% for post in posts %}
         <div class="post">
