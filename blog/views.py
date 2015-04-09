@@ -68,17 +68,17 @@ def post_publish(request, pk):
 
 @login_required
 def post_remove(request, pk):
-    import ipdb
-    ipdb.set_trace()
     post = get_object_or_404(Post, pk=pk)
-    form = ConfirmForm(instance=post)
-    if form.is_valid():
-        post.delete()
-        return redirect('blog.views.post_list')
+    if request.method == "POST":
+        form = ConfirmForm(request.POST, instance=post)
+        if form.is_valid():
+            post.delete()
+            return redirect('blog.views.post_list')
     else:
-        form = PostForm(instance=post)
+        form = ConfirmForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
-    
+
+
 #@login_required
 #def post_remove(request, pk):
 #    post = get_object_or_404(Post, pk=pk)
