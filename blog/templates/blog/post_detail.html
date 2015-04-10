@@ -17,40 +17,39 @@
 {% endblock sub_heading %}
 
 {% block content %}
-    <div class="date">
-      <div class="pure-g">
-        <div class="pure-u-1">
-          <div class="pure-menu pure-menu-open pure-menu-horizontal">
-            <ul>
-            {% if not post.published_date %}
-              <li>
-                <a href="{% url 'blog.views.post_publish' pk=post.pk %}"><i class="fa fa-paper-plane-o"></i>
-                  Publish Post
-                </a>
-              </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-              <li>
-                <a href="{% url 'post_edit' pk=post.pk %}"><i class="fa fa-edit"></i>
-                  Edit Post
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'post_delete' pk=post.pk %}"><i class="fa fa-trash-o"></i>
-                  Delete Post
-                </a>
-              </li>
-            {% endif %}
-            </ul>
-          </div>
+  <div class="date">
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <ul>
+          {% if not post.published_date %}
+            <li>
+              <a href="{% url 'blog.views.post_publish' pk=post.pk %}"><i class="fa fa-paper-plane-o"></i>
+                Publish Post
+              </a>
+            </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+            <li>
+              <a href="{% url 'post_edit' pk=post.pk %}"><i class="fa fa-edit"></i>
+                Edit Post
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'post_delete' pk=post.pk %}"><i class="fa fa-trash-o"></i>
+                Delete Post
+              </a>
+            </li>
+          {% endif %}
+          </ul>
         </div>
       </div>
     </div>
-    <div class="post">
-      {% if post.published_date %}
-        {{ post.published_date }}
-      {% endif %}
-      <h1>{{ post.title }}</h1>
-      <p>{{ post.text|linebreaks }}</p>
-    </div>    
+  </div>
+  {% if post.published_date %}
+    {{ post.published_date }}
+  {% endif %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text|linebreaks }}</p>
+  </div>    
 {% endblock content %}
