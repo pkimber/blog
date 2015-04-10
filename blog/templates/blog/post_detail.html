@@ -22,8 +22,7 @@
         <div class="pure-u-1">
           <div class="pure-menu pure-menu-open pure-menu-horizontal">
             <ul>
-            {% if post.published_date %}
-            {% else %}
+            {% if not post.published_date %}
               <li>
                 <a href="{% url 'blog.views.post_publish' pk=post.pk %}"><i class="fa fa-paper-plane-o"></i>
                   Publish Post

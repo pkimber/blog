@@ -78,13 +78,6 @@ def post_remove(request, pk):
         form = ConfirmForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
-
-#@login_required
-#def post_remove(request, pk):
-#    post = get_object_or_404(Post, pk=pk)
-#    post.delete()
-#    return redirect('blog.views.post_list')    
-        
 class BlogView(
         LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, TemplateView):
 
