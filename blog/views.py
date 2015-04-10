@@ -67,7 +67,7 @@ def post_publish(request, pk):
     return redirect('blog.views.post_detail', pk=pk)
 
 @login_required
-def post_remove(request, pk):
+def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = ConfirmForm(request.POST, instance=post)
@@ -76,7 +76,7 @@ def post_remove(request, pk):
             return redirect('blog.views.post_list')
     else:
         form = ConfirmForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_delete.html', {'form': form,'post': post})
 
 class BlogView(
         LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, TemplateView):
